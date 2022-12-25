@@ -1,6 +1,7 @@
 package com.jonas.apiprodutos.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -25,7 +27,7 @@ public class Usuarios {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    private Integer nome;
+    private String nome;
 
     @Column(unique = true)
     private String email;

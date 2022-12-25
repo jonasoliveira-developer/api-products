@@ -1,10 +1,12 @@
 package com.jonas.apiprodutos.domain;
 
 import lombok.AllArgsConstructor;
+
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.el.stream.Stream;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,19 +18,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
-    private Integer id;
+    private  Integer id;
 
-    @Column(unique = true)
-    private String titulo;
+    @Column(nullable = true)
+    private String descricao;
 
     @OneToMany(mappedBy = "categoria")
     private List<Produtos> produtos = new ArrayList<>();
+
 }
