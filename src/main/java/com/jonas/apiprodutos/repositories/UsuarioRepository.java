@@ -1,9 +1,9 @@
 package com.jonas.apiprodutos.repositories;
 
-import com.jonas.apiprodutos.domain.Pedidos;
+import com.jonas.apiprodutos.domain.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PedidosRepository extends JpaRepository<Pedidos, Integer> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 }

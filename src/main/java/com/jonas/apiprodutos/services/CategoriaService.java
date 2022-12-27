@@ -6,18 +6,18 @@ import com.jonas.apiprodutos.repositories.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+import java.util.Optional;
 
 
 @Service
-public class DBService {
+public class CategoriaService {
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
-    public void instanciaDB() {
+    private CategoriaRepository repository;
 
-        Categoria c1 = Categoria.builder().titulo("LIVROS").build();
-        categoriaRepository.saveAll(Arrays.asList(c1));
-
+    public Categoria findById(Integer id) {
+        Optional<Categoria> obj = repository.findById(id);
+        return obj.orElse(null);
     }
+
 }
