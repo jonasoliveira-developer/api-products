@@ -32,6 +32,7 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(nullable = false)
     private String titulo;
 
     @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
