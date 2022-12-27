@@ -6,6 +6,7 @@ import com.jonas.apiprodutos.dtos.CategoriaDTO;
 import com.jonas.apiprodutos.repositories.CategoriaRepository;
 import com.jonas.apiprodutos.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,6 +43,12 @@ public class CategoriaService {
 
     public void delete(Integer id) {
         findById(id);
-        repository.deleteById(id);
+
+        try {
+            repository.deleteById(id);
+        }catch (DataIntegrityViolationException e) {
+            throw new ObjectNotFoundException("Categoria não pode ser deletado! Existem produtos associados");
+        }
+
     }
 }
