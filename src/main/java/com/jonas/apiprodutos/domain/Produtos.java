@@ -39,6 +39,7 @@ public class Produtos {
     @JoinColumn(name= "categoria_id")
     private Categoria categoria;
 
+
     @OneToOne
     @JoinColumn(name = "especificacoes_id")
     private Especificacoes especificacoes;
