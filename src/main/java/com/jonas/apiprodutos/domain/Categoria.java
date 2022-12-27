@@ -33,7 +33,7 @@ public class Categoria {
     private Integer id;
 
     @Column(nullable = false)
-    private String titulo;
+    private String categoria;
 
     @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
     private List<Produtos> produtos;

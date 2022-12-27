@@ -30,13 +30,13 @@ public class CategoriaService {
 
     public Categoria crate(Categoria obj) {
         obj.setId(null);
-          obj.setTitulo(obj.getTitulo().toUpperCase());
+          obj.setCategoria(obj.getCategoria().toUpperCase());
         return repository.save(obj);
     }
 
     public Categoria update(Integer id, CategoriaDTO objDTO) {
         Categoria obj = findById(id);
-        obj.setTitulo(objDTO.getTitulo().toUpperCase());
+        obj.setCategoria(objDTO.getCategoria().toUpperCase());
         return repository.save(obj);
     }
 

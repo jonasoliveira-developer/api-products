@@ -12,6 +12,6 @@ public class CategoriaDTO {
 
     private Integer id;
 
-    private String titulo;
+    private String categoria;
 
 }
