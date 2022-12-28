@@ -2,7 +2,7 @@ package com.jonas.apiprodutos.Resources;
 
 import com.jonas.apiprodutos.domain.Produtos;
 import com.jonas.apiprodutos.dtos.ProdutoDTO;
-import com.jonas.apiprodutos.config.services.ProdutoService;
+import com.jonas.apiprodutos.services.ProdutoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,14 +35,14 @@ public class ProdutoResource {
         return ResponseEntity.ok().body(obj);
 
     }
-    @GetMapping(params = "categoria")
+    @GetMapping
     public ResponseEntity<List<Produtos>> findByCategoria(
-            @RequestParam(value = "categoria", required = false) Integer categoria) {
+            @RequestParam(value = "categoria") Integer categoria) {
         List<Produtos> obj = service.findByCategoria(categoria);
        return ResponseEntity.ok().body(obj);
     }
 
-    @GetMapping
+    @GetMapping(value = "/all")
     public ResponseEntity<List<Produtos>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }

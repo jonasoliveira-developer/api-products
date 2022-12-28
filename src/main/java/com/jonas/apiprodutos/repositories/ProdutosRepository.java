@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface ProdutosRepository extends JpaRepository<Produtos, Integer> {
 
-    @Query(value = "SELECT * FROM PRODUTOS AS P JOIN CATEGORIA AS C ON P.CATEGORIA_ID=?1", nativeQuery = true )
+    @Query(value = "SELECT * FROM PRODUTOS AS P WHERE P.CATEGORIA_ID=?1", nativeQuery = true )
     List<Produtos> findByCategoria(Integer categoria);
 }

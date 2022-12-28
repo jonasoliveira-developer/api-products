@@ -35,7 +35,7 @@ public class Especificacoes {
     private Double peso;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "especificacoes")
+    @OneToOne(mappedBy = "especificacoes", orphanRemoval = true)
     private Produtos produtos;
 
 

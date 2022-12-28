@@ -1,6 +1,6 @@
 package com.jonas.apiprodutos.config;
 
-import com.jonas.apiprodutos.config.services.DBService;
+import com.jonas.apiprodutos.services.DBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

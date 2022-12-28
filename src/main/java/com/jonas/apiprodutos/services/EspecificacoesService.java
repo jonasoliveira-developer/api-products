@@ -1,6 +1,6 @@
-package com.jonas.apiprodutos.config.services;
+package com.jonas.apiprodutos.services;
 
-import com.jonas.apiprodutos.config.services.exceptions.ObjectNotFoundException;
+import com.jonas.apiprodutos.services.exceptions.ObjectNotFoundException;
 import com.jonas.apiprodutos.domain.Especificacoes;
 import com.jonas.apiprodutos.dtos.EspecificacoesDTO;
 import com.jonas.apiprodutos.repositories.EspecificacacaoRepository;
@@ -45,7 +45,7 @@ public class EspecificacoesService {
         try {
             repository.deleteById(id);
         }catch (DataIntegrityViolationException e){
-            throw new com.jonas.apiprodutos.config.services.exceptions.DataIntegrityViolationException(
+            throw new com.jonas.apiprodutos.services.exceptions.DataIntegrityViolationException(
                     "Especificações não pode ser deletado! Existem produtos associados");
         }
     }

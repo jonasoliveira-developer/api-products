@@ -1,9 +1,9 @@
-package com.jonas.apiprodutos.config.services;
+package com.jonas.apiprodutos.services;
 
 import com.jonas.apiprodutos.domain.Usuario;
 import com.jonas.apiprodutos.dtos.UsuarioDTO;
 import com.jonas.apiprodutos.repositories.UsuarioRepository;
-import com.jonas.apiprodutos.config.services.exceptions.ObjectNotFoundException;
+import com.jonas.apiprodutos.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;

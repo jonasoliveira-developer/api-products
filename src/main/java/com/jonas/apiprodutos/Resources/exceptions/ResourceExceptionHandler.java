@@ -1,7 +1,7 @@
 package com.jonas.apiprodutos.Resources.exceptions;
 
-import com.jonas.apiprodutos.config.services.exceptions.DataIntegrityViolationException;
-import com.jonas.apiprodutos.config.services.exceptions.ObjectNotFoundException;
+import com.jonas.apiprodutos.services.exceptions.DataIntegrityViolationException;
+import com.jonas.apiprodutos.services.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

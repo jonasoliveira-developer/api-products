@@ -1,4 +1,4 @@
-package com.jonas.apiprodutos.config.services.exceptions;
+package com.jonas.apiprodutos.services.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException {
     public ObjectNotFoundException(String message) {

@@ -14,8 +14,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -44,5 +48,9 @@ public class Produtos {
     @OneToOne
     @JoinColumn(name = "especificacoes_id")
     private Especificacoes especificacoes;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "produtos")
+    private List<Pedidos> pedidos = new ArrayList<>();
 
 }
