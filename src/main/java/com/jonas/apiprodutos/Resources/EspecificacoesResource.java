@@ -3,6 +3,7 @@ package com.jonas.apiprodutos.Resources;
 import com.jonas.apiprodutos.domain.Especificacoes;
 import com.jonas.apiprodutos.dtos.EspecificacoesDTO;
 import com.jonas.apiprodutos.services.EspecificacoesService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,7 @@ public class EspecificacoesResource {
     private ModelMapper mapper;
 
     @GetMapping("/{id}")
+    @Operation(summary = "Busca uma especificação pelo 'Id'.")
     public ResponseEntity<Especificacoes> findById(@PathVariable Integer id) {
         Especificacoes obj = service.findById(id);
        return ResponseEntity.ok().body(obj);
@@ -36,11 +38,13 @@ public class EspecificacoesResource {
     }
 
     @GetMapping
+    @Operation(summary = "Lista todas as especificações")
     public ResponseEntity<List<Especificacoes>> findAll() {
        return ResponseEntity.ok().body(service.findall());
     }
 
     @PostMapping
+    @Operation(summary = "Cria uma nova especificação")
     public  ResponseEntity<Especificacoes> create(@RequestBody Especificacoes obj) {
         Especificacoes newObj = service.create(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}")
@@ -49,6 +53,7 @@ public class EspecificacoesResource {
         return ResponseEntity.created(uri).body(obj);
     }
     @PutMapping("/{id}")
+    @Operation(summary = "Atualiza uma especificação")
     public ResponseEntity<EspecificacoesDTO> update(
             @PathVariable Integer id, @RequestBody EspecificacoesDTO objDTO) {
        return ResponseEntity.ok().body(
@@ -56,6 +61,7 @@ public class EspecificacoesResource {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Deleta uma especificação pelo 'Id'")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);
        return ResponseEntity.noContent().build();

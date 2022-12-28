@@ -3,6 +3,7 @@ package com.jonas.apiprodutos.Resources;
 import com.jonas.apiprodutos.domain.Usuario;
 import com.jonas.apiprodutos.dtos.UsuarioDTO;
 import com.jonas.apiprodutos.services.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,17 +32,20 @@ public class UsuarioResource {
 
 
     @GetMapping(value = "/{id}")
+    @Operation(summary = "Busca usuário pelo 'Id'.")
     public ResponseEntity<Usuario> findById(@PathVariable Integer id) {
         Usuario obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
     @GetMapping
+    @Operation(summary = "Lista todos os usuários ")
     public ResponseEntity<List<UsuarioDTO>> findAll() {
         return ResponseEntity.ok().body(service.findAll().stream().map(
                 categoria -> mapper.map(categoria, UsuarioDTO.class)).collect(Collectors.toList()));
     }
     @PostMapping
+    @Operation(summary = "Cria um novo usuários ")
     public ResponseEntity<Usuario> create(@RequestBody Usuario obj) {
         obj = service.crate(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -52,6 +56,7 @@ public class UsuarioResource {
     }
 
     @PutMapping(value = "/{id}")
+    @Operation(summary = "Atualiza um usuário peli 'Id' ")
     public ResponseEntity<UsuarioDTO> update(
             @PathVariable Integer id, @RequestBody UsuarioDTO objDTO) {
 
@@ -60,6 +65,7 @@ public class UsuarioResource {
     }
 
     @DeleteMapping(value = "/{id}")
+    @Operation(summary = "Deleta um usuário peli 'Id' ")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);
         return ResponseEntity.noContent().build();

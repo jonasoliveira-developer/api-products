@@ -3,6 +3,7 @@ package com.jonas.apiprodutos.Resources;
 import com.jonas.apiprodutos.domain.Categoria;
 import com.jonas.apiprodutos.dtos.CategoriaDTO;
 import com.jonas.apiprodutos.services.CategoriaService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,17 +33,20 @@ public class CategoriaResource {
 
 
     @GetMapping(value = "/{id}")
+    @Operation(summary = "Busca categoria pelo 'Id'.")
     public ResponseEntity<Categoria> findById(@PathVariable Integer id) {
         Categoria obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
     @GetMapping
+    @Operation(summary = "Lista todas as categorias")
     public ResponseEntity<List<CategoriaDTO>> findAll() {
        return ResponseEntity.ok().body(service.findAll().stream().map(
                categoria -> mapper.map(categoria, CategoriaDTO.class)).collect(Collectors.toList()));
     }
     @PostMapping
+    @Operation(summary = "Cria uma nova categoria")
     public ResponseEntity<Categoria> create(@RequestBody Categoria obj) {
         obj = service.crate(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -53,6 +57,7 @@ public class CategoriaResource {
     }
 
     @PutMapping(value = "/{id}")
+    @Operation(summary = "Atualiza uma categoria")
     public ResponseEntity<CategoriaDTO> update(
             @PathVariable Integer id, @RequestBody CategoriaDTO objDTO) {
 
@@ -61,6 +66,7 @@ public class CategoriaResource {
     }
 
     @DeleteMapping(value = "/{id}")
+    @Operation(summary = "Deleta uma categoria pelo 'Id'")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);
         return ResponseEntity.noContent().build();

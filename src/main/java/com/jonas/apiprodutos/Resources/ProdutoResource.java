@@ -3,6 +3,7 @@ package com.jonas.apiprodutos.Resources;
 import com.jonas.apiprodutos.domain.Produtos;
 import com.jonas.apiprodutos.dtos.ProdutoDTO;
 import com.jonas.apiprodutos.services.ProdutoService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,35 +31,40 @@ public class ProdutoResource {
     private ModelMapper mapper;
 
     @GetMapping("/{id}")
+    @Operation(summary = "Busca produto pelo 'Id'.")
     public ResponseEntity<Produtos> findById(@PathVariable Integer id) {
         Produtos obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
 
     }
+
     @GetMapping
+    @Operation(summary = "Lista produtos pela 'categoria'.")
     public ResponseEntity<List<Produtos>> findByCategoria(
             @RequestParam(value = "categoria") Integer categoria) {
         List<Produtos> obj = service.findByCategoria(categoria);
-       return ResponseEntity.ok().body(obj);
+        return ResponseEntity.ok().body(obj);
     }
 
     @GetMapping(value = "/all")
+    @Operation(summary = "Lista todos os produtos")
     public ResponseEntity<List<Produtos>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
 
     @PostMapping
-    public  ResponseEntity<Produtos> create(
-            @RequestParam(value = "categoria" , required = false )Integer cat ,
+    @Operation(summary = "Cria um novo produto")
+    public ResponseEntity<Produtos> create(
+            @RequestParam(value = "categoria", required = false) Integer cat,
             @RequestParam(value = "especificacoes") Integer esp, @RequestBody Produtos obj) {
-        Produtos newObj = service.create( obj, cat, esp);
+        Produtos newObj = service.create(obj, cat, esp);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}")
                 .buildAndExpand(obj.getId()).toUri();
-
         return ResponseEntity.created(uri).body(obj);
     }
 
     @PutMapping(value = "/{id}")
+    @Operation(summary = "Atualiza um produto buscando pelo 'Id'")
     public ResponseEntity<ProdutoDTO> update(
             @PathVariable Integer id, @RequestBody ProdutoDTO objDTO) {
         return ResponseEntity.ok().body(
@@ -66,6 +72,7 @@ public class ProdutoResource {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Deleta um produto pelo 'Id'.")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
