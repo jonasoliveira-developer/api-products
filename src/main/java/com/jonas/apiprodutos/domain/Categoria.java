@@ -2,6 +2,8 @@ package com.jonas.apiprodutos.domain;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,6 +37,7 @@ public class Categoria {
     @Column(nullable = false)
     private String categoria;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
     private List<Produtos> produtos;
 

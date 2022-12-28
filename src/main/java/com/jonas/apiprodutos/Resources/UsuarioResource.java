@@ -2,7 +2,7 @@ package com.jonas.apiprodutos.Resources;
 
 import com.jonas.apiprodutos.domain.Usuario;
 import com.jonas.apiprodutos.dtos.UsuarioDTO;
-import com.jonas.apiprodutos.services.UsuarioService;
+import com.jonas.apiprodutos.config.services.UsuarioService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

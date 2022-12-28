@@ -1,4 +1,4 @@
-package com.jonas.apiprodutos.services;
+package com.jonas.apiprodutos.config.services;
 
 
 import com.jonas.apiprodutos.domain.Categoria;
@@ -21,15 +21,13 @@ public class DBService {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
-
     @Autowired
     private EspecificacacaoRepository especificacacaoRepository;
-
     @Autowired
-    ProdutosRepository produtosRepository;
-
+    private ProdutosRepository produtosRepository;
     @Autowired
-    UsuarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
+
 
 
     public void instanciaDB() {

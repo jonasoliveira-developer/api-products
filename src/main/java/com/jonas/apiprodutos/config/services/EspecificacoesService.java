@@ -1,9 +1,9 @@
-package com.jonas.apiprodutos.services;
+package com.jonas.apiprodutos.config.services;
 
+import com.jonas.apiprodutos.config.services.exceptions.ObjectNotFoundException;
 import com.jonas.apiprodutos.domain.Especificacoes;
 import com.jonas.apiprodutos.dtos.EspecificacoesDTO;
 import com.jonas.apiprodutos.repositories.EspecificacacaoRepository;
-import com.jonas.apiprodutos.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -45,7 +45,7 @@ public class EspecificacoesService {
         try {
             repository.deleteById(id);
         }catch (DataIntegrityViolationException e){
-            throw new com.jonas.apiprodutos.services.exceptions.DataIntegrityViolationException(
+            throw new com.jonas.apiprodutos.config.services.exceptions.DataIntegrityViolationException(
                     "Especificações não pode ser deletado! Existem produtos associados");
         }
     }

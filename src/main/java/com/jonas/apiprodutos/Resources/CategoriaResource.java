@@ -2,7 +2,7 @@ package com.jonas.apiprodutos.Resources;
 
 import com.jonas.apiprodutos.domain.Categoria;
 import com.jonas.apiprodutos.dtos.CategoriaDTO;
-import com.jonas.apiprodutos.services.CategoriaService;
+import com.jonas.apiprodutos.config.services.CategoriaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

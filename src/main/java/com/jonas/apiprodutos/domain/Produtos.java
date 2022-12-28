@@ -1,6 +1,7 @@
 package com.jonas.apiprodutos.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,7 +35,7 @@ public class Produtos {
 
     private String descricao;
 
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name= "categoria_id")
     private Categoria categoria;

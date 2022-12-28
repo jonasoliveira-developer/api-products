@@ -1,4 +1,4 @@
-package com.jonas.apiprodutos.services.exceptions;
+package com.jonas.apiprodutos.config.services.exceptions;
 
 public class DataIntegrityViolationException extends RuntimeException {
     public DataIntegrityViolationException(String message) {
