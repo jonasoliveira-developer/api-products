@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,7 @@ public class ProdutoResource {
     @Autowired
     private ModelMapper mapper;
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/{id}")
     @Operation(summary = "Busca produto pelo 'Id'.")
     public ResponseEntity<Produtos> findById(@PathVariable Integer id) {
@@ -38,6 +40,7 @@ public class ProdutoResource {
 
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping
     @Operation(summary = "Lista produtos pela 'categoria'.")
     public ResponseEntity<List<Produtos>> findByCategoria(
@@ -46,12 +49,14 @@ public class ProdutoResource {
         return ResponseEntity.ok().body(obj);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping(value = "/all")
     @Operation(summary = "Lista todos os produtos")
     public ResponseEntity<List<Produtos>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @PostMapping
     @Operation(summary = "Cria um novo produto")
     public ResponseEntity<Produtos> create(
@@ -63,6 +68,7 @@ public class ProdutoResource {
         return ResponseEntity.created(uri).body(obj);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @PutMapping(value = "/{id}")
     @Operation(summary = "Atualiza um produto buscando pelo 'Id'")
     public ResponseEntity<ProdutoDTO> update(
@@ -70,7 +76,7 @@ public class ProdutoResource {
         return ResponseEntity.ok().body(
                 mapper.map(service.update(id, objDTO), ProdutoDTO.class));
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @DeleteMapping("/{id}")
     @Operation(summary = "Deleta um produto pelo 'Id'.")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {

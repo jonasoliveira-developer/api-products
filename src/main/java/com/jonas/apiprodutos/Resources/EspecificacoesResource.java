@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +30,7 @@ public class EspecificacoesResource {
     @Autowired
     private ModelMapper mapper;
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/{id}")
     @Operation(summary = "Busca uma especificação pelo 'Id'.")
     public ResponseEntity<Especificacoes> findById(@PathVariable Integer id) {
@@ -36,13 +38,14 @@ public class EspecificacoesResource {
        return ResponseEntity.ok().body(obj);
 
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping
     @Operation(summary = "Lista todas as especificações")
     public ResponseEntity<List<Especificacoes>> findAll() {
        return ResponseEntity.ok().body(service.findall());
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @PostMapping
     @Operation(summary = "Cria uma nova especificação")
     public  ResponseEntity<Especificacoes> create(@RequestBody Especificacoes obj) {
@@ -52,6 +55,8 @@ public class EspecificacoesResource {
 
         return ResponseEntity.created(uri).body(obj);
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza uma especificação")
     public ResponseEntity<EspecificacoesDTO> update(
@@ -60,6 +65,7 @@ public class EspecificacoesResource {
                mapper.map(service.update(id, objDTO), EspecificacoesDTO.class));
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @DeleteMapping("/{id}")
     @Operation(summary = "Deleta uma especificação pelo 'Id'")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {

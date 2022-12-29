@@ -6,6 +6,7 @@ import com.jonas.apiprodutos.repositories.UsuarioRepository;
 import com.jonas.apiprodutos.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,9 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
     public Usuario findById(Integer id) {
         Optional<Usuario> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado. id:" + id));
@@ -25,9 +29,12 @@ public class UsuarioService {
         return repository.findAll();
     }
 
-    public Usuario crate(Usuario obj) {
+    public Usuario create(Usuario obj) {
         obj.setId(null);
-        return repository.save(obj);
+        Usuario newObj = new Usuario();
+        newObj.setSenha(encoder.encode(obj.getSenha()));
+        return repository.save(newObj);
+
     }
 
     public Usuario update(Integer id, UsuarioDTO objDTO) {

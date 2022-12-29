@@ -6,6 +6,7 @@ import com.jonas.apiprodutos.services.PedidosService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +26,7 @@ public class PedidosResource {
     @Autowired
     private PedidosService service;
 
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping(value = "/{id}")
     @Operation(summary = "Busca pedido pelo 'Id'.")
     public ResponseEntity<Pedidos> findById(@PathVariable Integer id) {
@@ -33,12 +34,14 @@ public class PedidosResource {
         return ResponseEntity.ok().body(obj);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping
     @Operation(summary = "Lista todos os pedidos")
     public ResponseEntity<List<Pedidos>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @PostMapping
     @Operation(summary = "Cria um novo pedido")
     public ResponseEntity<Pedidos> create(@RequestBody PedidosDTO obj) {
@@ -51,6 +54,7 @@ public class PedidosResource {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}")
     @Operation(summary = "Deleta um pedido pelo 'Id'")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {

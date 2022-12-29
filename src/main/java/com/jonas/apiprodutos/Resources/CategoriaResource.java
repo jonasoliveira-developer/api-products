@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +32,7 @@ public class CategoriaResource {
     @Autowired
     private CategoriaService service;
 
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping(value = "/{id}")
     @Operation(summary = "Busca categoria pelo 'Id'.")
     public ResponseEntity<Categoria> findById(@PathVariable Integer id) {
@@ -40,12 +41,14 @@ public class CategoriaResource {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @Operation(summary = "Lista todas as categorias")
     public ResponseEntity<List<CategoriaDTO>> findAll() {
        return ResponseEntity.ok().body(service.findAll().stream().map(
                categoria -> mapper.map(categoria, CategoriaDTO.class)).collect(Collectors.toList()));
     }
     @PostMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @Operation(summary = "Cria uma nova categoria")
     public ResponseEntity<Categoria> create(@RequestBody Categoria obj) {
         obj = service.crate(obj);
@@ -55,7 +58,7 @@ public class CategoriaResource {
         return   ResponseEntity.created(uri).body(obj);
 
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @PutMapping(value = "/{id}")
     @Operation(summary = "Atualiza uma categoria")
     public ResponseEntity<CategoriaDTO> update(
@@ -64,7 +67,7 @@ public class CategoriaResource {
         return ResponseEntity.ok().body(mapper.map(
                 service.update(id, objDTO), CategoriaDTO.class));
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @DeleteMapping(value = "/{id}")
     @Operation(summary = "Deleta uma categoria pelo 'Id'")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {

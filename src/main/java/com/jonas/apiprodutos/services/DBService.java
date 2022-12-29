@@ -5,17 +5,22 @@ import com.jonas.apiprodutos.domain.Categoria;
 import com.jonas.apiprodutos.domain.Especificacoes;
 import com.jonas.apiprodutos.domain.Pedidos;
 import com.jonas.apiprodutos.domain.Produtos;
+import com.jonas.apiprodutos.domain.Role;
 import com.jonas.apiprodutos.domain.Usuario;
+import com.jonas.apiprodutos.domain.enums.RoleEnum;
 import com.jonas.apiprodutos.repositories.CategoriaRepository;
 import com.jonas.apiprodutos.repositories.EspecificacacaoRepository;
 import com.jonas.apiprodutos.repositories.PedidoRepository;
 import com.jonas.apiprodutos.repositories.ProdutosRepository;
+import com.jonas.apiprodutos.repositories.RoleRepository;
 import com.jonas.apiprodutos.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 
 @Service
@@ -32,11 +37,23 @@ public class DBService {
     @Autowired
     private PedidoRepository pedidoRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
 
 
     public void instanciaDB() {
 
-        Usuario user = Usuario.builder().nome("Jonas Oliveira").email("jonas@email.com").build();
+        Role role_admin = Role.builder().roles(RoleEnum.ROLE_ADMIN).build();
+
+        roleRepository.save(role_admin);
+
+
+        Usuario user = Usuario.builder().nome(
+                "Jonas Oliveira").email("jonas@email.com").senha(encoder.encode("1234")).role(Arrays.asList(role_admin)).build();
         usuarioRepository.saveAll(Arrays.asList(user));
 
         Categoria c1 = Categoria.builder().categoria("LIVROS").build();
