@@ -18,9 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 
 @Service
@@ -44,7 +42,6 @@ public class DBService {
     private RoleRepository roleRepository;
 
 
-
     public void instanciaDB() {
 
         Role role_admin = Role.builder().roles(RoleEnum.ROLE_ADMIN).build();
@@ -53,20 +50,20 @@ public class DBService {
 
 
         Usuario user = Usuario.builder().nome(
-                "Jonas Oliveira").email("jonas@email.com").senha(encoder.encode("1234")).role(Arrays.asList(role_admin)).build();
-        usuarioRepository.saveAll(Arrays.asList(user));
+                "Jonas Oliveira").email("jonas@email.com").senha(encoder.encode("1234")).role(Collections.singletonList(role_admin)).build();
+        usuarioRepository.saveAll(Collections.singletonList(user));
 
         Categoria c1 = Categoria.builder().categoria("LIVROS").build();
-        categoriaRepository.saveAll(Arrays.asList(c1));
+        categoriaRepository.saveAll(Collections.singletonList(c1));
 
         Especificacoes e = Especificacoes.builder().peso(20.).altura(20.).largura(10.).build();
-        especificacacaoRepository.saveAll(Arrays.asList(e));
+        especificacacaoRepository.saveAll(Collections.singletonList(e));
 
         Produtos produtos = Produtos.builder().nome("Clean Code").descricao("Livro de tecnologia").categoria(c1).especificacoes(e).build();
         produtosRepository.saveAll(Collections.singletonList(produtos));
 
-        Pedidos pedidos = new Pedidos(null, user,Arrays.asList(produtos));
-        pedidoRepository.saveAll(Arrays.asList(pedidos));
+        Pedidos pedidos = new Pedidos(null, user, Collections.singletonList(produtos));
+        pedidoRepository.saveAll(Collections.singletonList(pedidos));
 
     }
 }
